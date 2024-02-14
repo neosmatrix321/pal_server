@@ -27,7 +27,7 @@ function http(url, reason) {
   xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xmlhttp.send("");
 }
-function on_load() {
-  http('includes/get_ping.php', 'ping_innerHTML');
-}
-window.addEventListener("load", () => { on_load(); });
+// function on_load() {
+//   http('includes/get_ping.php', 'ping_innerHTML');
+// }
+// window.addEventListener("load", () => { on_load(); });

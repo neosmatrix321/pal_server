@@ -115,3 +115,6 @@ h2 {
 }
 #player_grid_item {
 }
+#websocket_innerHTML {
+  min-height:40px;
+}
