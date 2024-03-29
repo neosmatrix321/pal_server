@@ -16,6 +16,8 @@ h1 {
   width: max-content;
   padding: 10px;
   border-radius: 5px;
+  white-space: nowrap;
+  /* flex-wrap: nowrap; */
 }
 h2 {
   font-size: 1.2rem;
