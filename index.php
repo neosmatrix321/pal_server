@@ -89,6 +89,7 @@ $pid_file = __DIR__.'/server/pal_server.pid'
           <div class="link"><a href="https://paldex.gg" target="_blank">paldex.gg</a></div>
           <div class="link"><a href="https://tech.palworldgame.com" target="_blank">tech.palworldgame.com</a></div>
           <div class="link"><a href="https://palworld.gg" target="_blank">palworld.gg</a></div>
+          <div class="link"><a href="https://palworldoptions.com/" target="_blank">palworldoptions.com</a></div>
         </div>
         <div class="darker display_flex_row wrap max_content padding_max" style="display: block;">
           The server will restart every 6 hours<br><br>Regards neosmatrix &#9829;<br>Contact me: <a
