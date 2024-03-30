@@ -8,10 +8,7 @@
 		"dom",
 	  ],
 	  "module": "es2020",
-	  "rootDir": null,
+	  "rootDir": "./",
 	  "sourceMap": true,
 	},
-	"files": [
-		"./includes/js/main.ts",
-	],
 }
