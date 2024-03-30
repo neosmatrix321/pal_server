@@ -1,29 +1,3 @@
-<?php
-spl_autoload_register(function ($classname) {
-  // Klassennamen auflösen
-  $namespace = strpos($classname, "\\") ? substr($classname, 0, strpos($classname, "\\")) : '';
-  $classname = strpos($classname, "\\") ? substr($classname, strpos($classname, "\\") + 1) : $classname;
-  // Klassendatei laden
-  $filename = __DIR__ . "/includes/php/{$namespace}/{$classname}.php";
-  if (file_exists($filename)) {
-    require_once $filename;
-  }
-});
-function get_process_info(&$my_server_obj)
-{
-  $my_server_obj->checkStatus();
-  $temp_server["alive"] = $my_server_obj->status['alive'];
-  $temp_server['time_created'] = $my_server_obj->status['time_created'];
-  $temp_server['time_running'] = $my_server_obj->status['time_running'];
-  $temp_server['status'] = json_encode($my_server_obj->status['status'], JSON_FORCE_OBJECT | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_NUMERIC_CHECK);
-  // $temp_server['process_server_output'] = read_logs("process_server_output");
-  // $temp_server['server_output'] = read_logs("server_output");
-  // $temp_server['process_server_error'] = json_encode(read_logs("process_server_error"));
-  // $temp_server['server_error'] = read_logs("server_error");
-  return $temp_server;
-}
-$pid_file = __DIR__.'/server/pal_server.pid'
-?>
 <html lang="en">
 
   <head>
@@ -32,16 +6,11 @@ $pid_file = __DIR__.'/server/pal_server.pid'
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" type="text/css" href="css/main.css" media="screen" />
     <!-- <script src="includes/js/main.js"></script> -->
-    <script src="includes/js/main_header.js" type="module"></script>
+    <script src="includes/js/main.js" type="module"></script>
   </head>
 
   <body style="">
     <div id="main_container">
-    <?php
-    $my_server_obj = new origin\BackgroundProcess(__DIR__);
-    $server_status = get_process_info($my_server_obj);
- // isConnected = true;
-     ?> 
      <div class="lighter display_flex_col nowrap max_content padding_double"><h1 class="darker display_flex_row nowrap padding_double" style="min-width:90vw;">Welcome to&nbsp;<div id="rconInfoName_innerHTML">a PalWorld</div>&nbsp;Server</h1><h2>ver.: &nbsp;<div id="rconInfoVer_innerHTML">NaN</div></h2></div>
 
 
@@ -86,9 +55,18 @@ $pid_file = __DIR__.'/server/pal_server.pid'
       </div>
       <div class="lighter display_flex_row no_wrap">
         
-       <div class="darker no_wrap">Clients active:</div><div class="darker no_wrap" id="extras_activeClients_innerHTML">NaN</div>
-       <div class="darker no_wrap">Clients counter:</div><div class="darker no_wrap" id="extras_clientsCounter_innerHTML">NaN</div>
+       <div class="darker no_wrap">Clients active:&nbsp;
+        <div id="extras_activeClients_innerHTML">NaN</div>
+      </div>
+      
+      <div class="darker no_wrap">Clients counter:&nbsp;
+        <div id="extras_clientsCounter_innerHTML">NaN</div>
        </div>
+
+       <div class="darker no_wrap">Websocket&nbsp;
+         <div id="extras_websocketConnected_innerHTML">NaN</div>
+       </div>
+      </div>
       <div class="lighter display_flex_row no_wrap">
       <div class='display_flex_row no_wrap padding_double'>
       <div class='darker display_flex_row no_wrap margin_double'>
@@ -108,32 +86,13 @@ $pid_file = __DIR__.'/server/pal_server.pid'
         </div>
       </div>
       <div class="lighter display_flex_col" style="">
-        <?php
-        $server_log = file('/var/www/html/pal_server/logs/pal_server.log', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-        foreach ($server_log as $file_value) {
-          echo <<<HTML
-          <div class="darker display_flex_row no_wrap" style="">
-          {$file_value}
-          </div>
-          HTML;
-        }
-        ?>
       </div>
       <div class="lighter display_flex_col no_wrap" style="">
         <div class="darker display_flex_col no_wrap" style="">
           <pre>
-            <?php
-            exec("top -n1 -bp `cat $pid_file`", $output);
-            foreach ($output as $value) {
-              echo <<<HTML
-              {$value}<br>
-              HTML;
-            }
-            ?>
           </pre>
         </div>
       </div>
     </div>
   </body>
-  <script src="includes/js/main_footer.js" type="module"></script>
 </html>
