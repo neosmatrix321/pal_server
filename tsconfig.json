@@ -1,14 +1,20 @@
 {
 	"compilerOptions": {
-	  "target": "es2020",
-	  "moduleResolution": "node",
+	//   "target": "ESNext",
 	  "strict": true,
-	  "lib": [
-		"ES2020",
-		"dom",
-	  ],
-	  "module": "es2020",
-	  "rootDir": "./",
+	//   "lib": [
+	// 	"ESNext",
+	// 	"ES2020",
+	// 	"dom",
+	//   ],
+	//   "module": "NodeNext",
 	  "sourceMap": true,
-	},
+	  "allowJs": true,
+	  "checkJs": true,
+	  "esModuleInterop": true,
+	  "forceConsistentCasingInFileNames": true,
+	  "skipLibCheck": true,
+	  "moduleResolution": "Node",
+  	},
+	"extends": "./.svelte-kit/tsconfig.json"
 }

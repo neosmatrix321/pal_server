@@ -1,22 +1,30 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import { IPU } from '$lib';
+	// import { onMount } from 'svelte';
+	import type { IPU } from '$lib/types';
 
-	let cpu = 'NaN';
-	let mem = 'NaN';
-	let ctime = 'NaN';
-	let uptime = 'NaN';
-	let elapsed = 'NaN';
+    let cpu = 'NaN';
+    let mem = 'NaN';
+    let ctime = 'NaN';
+    let uptime = 'NaN';
+    let elapsed = 'NaN';
+    let timestampToDate: Date;
+    let formattedDate: string;
 
-	// function pidInfo(data: IPU) {
-	// 	cpu = Number(data.cpu / 4).toFixed(1);
-	// 	mem = Number(data.memory / 1024 / 1024 / 1024).toFixed(1);
-	// 	ctime = Number(data.ctime / 1000 / 60).toFixed(1);
-	// 	elapsed = Number(data.elapsed / 1000 / 60).toFixed(1);
-	// 	timestampToDate = new Date(Number(data.timestamp));
-	// 	formattedDate = timestampToDate.toLocaleTimeString();
-	// 	uptime = formattedDate;
-	// }
+	function pidInfo(data: IPU) {
+		cpu = Number(data.cpu / 4).toFixed(1);
+		mem = Number(data.memory / 1024 / 1024 / 1024).toFixed(1);
+		ctime = Number(data.ctime / 1000 / 60).toFixed(1);
+		elapsed = Number(data.elapsed / 1000 / 60).toFixed(1);
+		timestampToDate = new Date(Number(data.timestamp));
+		formattedDate = timestampToDate.toLocaleTimeString();
+		uptime = formattedDate;
+	}
+
+  // onMount(() => {
+  //   // Initialisiere hier deine Elemente, z.B.:
+
+  //   // ...
+  // });
 </script>
 
 <div class="darker display_flex_col max_content">
