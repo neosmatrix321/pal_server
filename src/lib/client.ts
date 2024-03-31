@@ -1,38 +1,32 @@
-import type { IClientMessagePaket, IExtras, IPU } from '$lib/types';
+import type { IClientMessagePaket, IExtras, IPU, IRconStatsInfo } from '$lib/types';
 
-import { pidInfoStore, localClientInfoStore, extrasStore, serverMessageStore, chatMessageStore } from './stores';
+import { pidInfoStore, localClientInfoStore, extrasStore, serverMessageStore, chatMessageStore, rconStatsInfoStore } from './stores';
 
 let queryObject: { [key: string]: string; };
 
 function handlePacket(packet: Partial<IClientMessagePaket>): void {
   // handleClientInfo(`${isConnected ? "connected" : "disconnected"}`);
   if (!packet) return;
-  console.dir(packet, { depth: 4, colors: true });
   for (const mainKey in packet) {
     if (!(mainKey in packet)) return;
     const Paket = packet[mainKey];
     if (!Paket) return;
     switch (mainKey) {
       case 'pidInfo':
-        if (mainKey === 'pidInfo') {
-          pidInfoStore.set(Paket as IPU);
-        }
+        pidInfoStore.set(Paket as IPU);
         break;
       case 'extras':
-        if (mainKey === 'extras') {
-          // console.log('extras', Paket);
-          extrasStore.set(Paket as IExtras);
-        }
+        extrasStore.set(Paket as IExtras);
         break;
       case 'serverMessage':
-        if (mainKey === 'serverMessage') {
-          serverMessageStore.set({ message: Paket as string });
-        }
+        serverMessageStore.set({ message: Paket as string });
         break;
       case 'chatMessage':
-        if (mainKey === 'chatMessage') {
-          chatMessageStore.set({ message: Paket as string });
-        }
+        console.log('chatMessage', Paket);
+        chatMessageStore.set({ message: Paket as string });
+        break;
+      case 'rconInfo':
+        rconStatsInfoStore.set(Paket as IRconStatsInfo);
         break;
     }
   }
@@ -52,10 +46,11 @@ export default async function createWSClient(): Promise<void> {
       // isConnected = true;
       const searchParams_temp: URLSearchParams = new URL(window.location.href).searchParams;
       queryObject = {};
-
+      
       searchParams_temp.forEach((value, key) => {
         queryObject[key] = value;
       });
+      queryObject["greeting"] = "Hello";
       // console.log('hi');
       ws.send(JSON.stringify(queryObject));
       // isConnected = true;

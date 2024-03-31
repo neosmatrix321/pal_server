@@ -29,22 +29,25 @@
   // });
 </script>
 
-<div class="darker display_flex_col max_content">
-	<div class="lighter display_flex_col max_content margin_double" style="min-width:200px;">
-		<div class="darker display_flex_row nowrap max_content padding_double">
-			CPU Load:&nbsp;{cpu}&nbsp;%
-		</div>
-		<div class="darker display_flex_row nowrap max_content padding_double">
-			RAM usage:&nbsp;{mem}&nbsp;GB
-		</div>
-		<div class="darker display_flex_row nowrap max_content padding_double">
-			ctime:&nbsp;{ctime}&nbsp;min
-		</div>
-		<div class="darker display_flex_row nowrap max_content padding_double">
-			Uptime:&nbsp;{uptime}&nbsp;min
-		</div>
-		<div class="darker display_flex_row nowrap max_content padding_double">
-			Time:&nbsp;{elapsed}&nbsp;
-		</div>
-	</div>
+<div class="info-panel">
+  <div class="info-item">
+    <span class="info-label">CPU Load:</span>
+    <span class="info-value">{cpu} %</span>
+  </div>
+  <div class="info-item">
+    <span class="info-label">RAM usage:</span>
+    <span class="info-value">{mem} GB</span>
+  </div>
+  <div class="info-item">
+    <span class="info-label">ctime:</span>
+    <span class="info-value">{ctime} min</span>
+  </div>
+  <div class="info-item">
+    <span class="info-label">Uptime:</span>
+    <span class="info-value">{uptime} min</span>
+  </div>
+  <div class="info-item">
+    <span class="info-label">Time:</span>
+    <span class="info-value">{elapsed}</span>
+  </div>
 </div>

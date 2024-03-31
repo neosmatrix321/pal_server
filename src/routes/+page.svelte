@@ -5,6 +5,7 @@
 	import Extra from './modules/Extra.svelte';
 	import ServerMessage from './modules/ServerMessage.svelte';
 	import ChatMesssage from './modules/ChatMesssage.svelte';
+  import Header from './modules/Header.svelte';
 
   onMount(async () => {
   try {
@@ -18,6 +19,7 @@
 </script>
 
 <section>
+  <Header />
   <PidInfo />
   <Extra />
   <ChatMesssage />
