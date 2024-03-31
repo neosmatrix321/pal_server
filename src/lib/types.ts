@@ -28,10 +28,15 @@ export interface IRconStatsPlayers {
   export interface IExtras {
     activeClients: number;
     clientsCounter: number;
-    [key: string]: number;
+    [key: string]: number | boolean;
   
   }
   
+  export interface ILocalClientInfo {
+    isConnected: boolean;
+    [key: string]: boolean;
+  }
+
   export interface IClientMessagePaket {
     serverMessage: string;
     pidInfo: IPU;
