@@ -3,6 +3,8 @@
 	import PidInfo from './modules/PidInfo.svelte';
   import client from '$lib/client';
 	import Extra from './modules/Extra.svelte';
+	import ServerMessage from './modules/ServerMessage.svelte';
+	import ChatMesssage from './modules/ChatMesssage.svelte';
 
   onMount(async () => {
   try {
@@ -18,5 +20,7 @@
 <section>
   <PidInfo />
   <Extra />
+  <ChatMesssage />
+  <ServerMessage />
 </section>
 

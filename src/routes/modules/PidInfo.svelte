@@ -9,7 +9,7 @@
     let uptime = 'NaN';
     let elapsed = 'NaN';
     let timestampToDate: Date;
-    let formattedDate: string;
+    let formattedDate: string = 'NaN';
 
 	pidInfoStore.subscribe((data: IPU) => {
 		cpu = Number(data.cpu / 4).toFixed(1);
@@ -18,7 +18,7 @@
 		elapsed = Number(data.elapsed / 1000 / 60).toFixed(1);
 		timestampToDate = new Date(Number(data.timestamp));
 		formattedDate = timestampToDate.toLocaleTimeString();
-		uptime = formattedDate;
+		uptime = `${formattedDate}`;
     });
 
 
