@@ -3,7 +3,7 @@
 	import { fly, fade } from 'svelte/transition';
 </script>
 {#if $isMenuVisibleStore}
-	<div class="menu-links" in:fly={{ x: -400, duration: 1500 }} out:fade>
+	<div class="menu-links" in:fly={{ x: -200, duration: 500 }} out:fade>
 		<h3>links worth to visit</h3>
 		<div class="menu-item-links">
 			<a href="https://paldex.gg" target="_blank">paldex.gg</a>
