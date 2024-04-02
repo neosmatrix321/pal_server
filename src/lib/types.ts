@@ -11,6 +11,14 @@ export interface IRconStatsPlayers {
     [key: string]: string;
   }
   
+  export interface IBooleanStatus {
+    serverFound: boolean;
+    rconConnected: boolean;
+    rconPortOpen: boolean;  
+    [key: string]: boolean;
+  }
+  
+
   export interface IPU {
     cpu: number,
     memory: number,
@@ -38,7 +46,8 @@ export interface IRconStatsPlayers {
   }
 
   export interface IClientMessagePaket {
-    serverMessage: string;
+    booleanStatus: IBooleanStatus;
+    serverMessage: string[];
     pidInfo: IPU;
     extras: IExtras;
     chatMessage: string;
@@ -46,7 +55,7 @@ export interface IRconStatsPlayers {
     rconInfo: IRconStatsInfo;
     latencyGoogle: string;
     latencyUser: string;
-    [key: string]: string | IPU | IExtras | IRconStatsPlayers[] | IRconStatsInfo;
+    [key: string]: string | IPU | IExtras | IRconStatsPlayers[] | IRconStatsInfo | string[] | IBooleanStatus;
   }
   
   export interface PidInfoElements {

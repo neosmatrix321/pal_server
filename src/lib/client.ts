@@ -1,6 +1,6 @@
-import type { IClientMessagePaket, IExtras, IPU, IRconStatsInfo } from '$lib/types';
+import type { IClientMessagePaket, IExtras, IPU, IRconStatsInfo, IRconStatsPlayers, IBooleanStatus } from '$lib/types';
 
-import { pidInfoStore, localClientInfoStore, extrasStore, serverMessageStore, chatMessageStore, rconStatsInfoStore } from './stores';
+import { pidInfoStore, localClientInfoStore, extrasStore, serverMessageStore, chatMessageStore, name, ver, latencyGoogle, latencyUser, booleanStatusStore } from '$lib/stores';
 
 let queryObject: { [key: string]: string; };
 
@@ -9,24 +9,42 @@ function handlePacket(packet: Partial<IClientMessagePaket>): void {
   if (!packet) return;
   for (const mainKey in packet) {
     if (!(mainKey in packet)) return;
-    const Paket = packet[mainKey];
+    let Paket: string | IRconStatsPlayers[] | IPU | IExtras | string[] | IRconStatsInfo | IBooleanStatus | undefined = packet[mainKey];
     if (!Paket) return;
     switch (mainKey) {
       case 'pidInfo':
+        Paket = Paket as IPU;
         pidInfoStore.set(Paket as IPU);
         break;
       case 'extras':
+        Paket = Paket as IExtras;
         extrasStore.set(Paket as IExtras);
         break;
       case 'serverMessage':
-        serverMessageStore.set({ message: Paket as string });
+        Paket = Paket as string[];
+        serverMessageStore.set(Paket as string[]);
         break;
       case 'chatMessage':
-        console.log('chatMessage', Paket);
-        chatMessageStore.set({ message: Paket as string });
+        Paket = Paket as string;
+          // console.log('chatMessage', Paket);
+        chatMessageStore.set({message: Paket as string});
         break;
       case 'rconInfo':
-        rconStatsInfoStore.set(Paket as IRconStatsInfo);
+        Paket = Paket as IRconStatsInfo;
+        name.set(Paket.name);
+        ver.set(Paket.ver);
+        break;
+      case 'latencyGoogle':
+        Paket = Paket as string;
+        latencyGoogle.set(Paket as string);
+        break;
+      case 'latencyUser':
+        Paket = Paket as string;
+        latencyUser.set(Paket as string);
+        break;
+      case 'booleanStatus':
+        Paket = Paket as IBooleanStatus;
+        booleanStatusStore.set(Paket as IBooleanStatus);
         break;
     }
   }
@@ -67,11 +85,15 @@ export default async function createWSClient(): Promise<void> {
     };
 
     ws.onclose = (): void => {
-      localClientInfoStore.set(({ isConnected: false }));
+      localClientInfoStore.set({ isConnected: false });
+      // Try to reconnect after a delay
+      // setTimeout(createWSClient, 5000);
     };
 
     ws.onerror = ((): void => {
-      localClientInfoStore.set(({ isConnected: false }));
+      localClientInfoStore.set({ isConnected: false });
+      // Try to reconnect after a delay
+      // setTimeout(createWSClient, 5000);
     });
 
   }

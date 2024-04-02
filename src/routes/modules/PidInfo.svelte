@@ -43,11 +43,11 @@
     <span class="info-value">{ctime} min</span>
   </div>
   <div class="info-item">
-    <span class="info-label">Uptime:</span>
-    <span class="info-value">{uptime} min</span>
+    <span class="info-label">utime:</span>
+    <span class="info-value">{elapsed} min</span>
   </div>
   <div class="info-item">
-    <span class="info-label">Time:</span>
-    <span class="info-value">{elapsed}</span>
+    <span class="info-label">Local time:</span>
+    <span class="info-value">{uptime}</span>
   </div>
 </div>
