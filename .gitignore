@@ -1,13 +1,42 @@
-.DS_Store
 node_modules
+
+# Output
+.output
+.vercel
+.netlify
+.wrangler
+.houdini
+/.svelte-kit
 build
-.svelte-kit
-package
+dist
+$houdini
+
+# OS
+.DS_Store
+Thumbs.db
+
+# ESLint cache
+.eslintcache
+
+# Env
 .env
 .env.*
 !.env.example
+!.env.test
+run_build.sh
+run_build.sh.old
+refresh_live.sh
+deploy.sh
+generate-schema.mjs
+generate-version.mjs
+/.not_used
+/server
+/logs
+
+# Vite
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
-.not_used
-server
-logs
+
+# Playwright
+test-results
+
